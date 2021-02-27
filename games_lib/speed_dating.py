@@ -8,6 +8,7 @@ from .utils import create_and_move
 from .utils import move_back
 
 import time, threading
+import random
 
 players_map = {}
 
@@ -26,16 +27,9 @@ async def start(bot, client, message):
     for player in players:
         if player not in players_map:
             players_map[player] = []
-        players_map[player].append(player)
+            #players_map[player].append(player)
     
     groups = pair_players(players_map, players)
-
-    if len(players) == 1:
-        groups[-1].append(players[0])
-        player = players[0]
-        for existing_player in groups[-1]:
-            players_map[existing_player].append(player)
-            players_map[player].append(existing_player)
 
     if len(groups) > 0:
         await create_and_move(bot, groups, message)
@@ -67,19 +61,48 @@ def roundEnded(bot, client, message, time):
 
     message.channel.send("Round ended, to start next round use !mitra start")
 
-def pair_players(player_map, players):
-    # if len(players_map[players[0]]) == len(players):
-    #     return None
-
-    groups = []
-
-    for i,speaker in enumerate(players):
-        for j,talker in enumerate(players):
-            if talker not in players_map[speaker]:
+def extract_pair(players):
+    for speaker in players:
+        for talker in players:
+            if talker not in players_map[speaker] and talker != speaker:
                 players_map[speaker].append(talker)
                 players_map[talker].append(speaker)
-                groups.append([talker, speaker])
+                pair = [talker, speaker]
                 players.remove(talker)
                 players.remove(speaker)
-                break
-    return groups
+                return pair, players
+    return (None, [])          
+
+# this could be done WAY smarter, but because it's a hackathon
+# we decided to stick with this very barbaric way :)
+def pair_players(player_map, players):
+    global players_map
+    backup_players_map = players_map
+    backup_players = players
+    maxlen = 0
+    longest_match = [[]]
+
+    for i in range(20):
+        groups = []
+        random.shuffle(players)
+
+        while len(players) > 1:
+            pair, players = extract_pair(players)
+            if pair != None:
+                groups.append(pair)
+
+        if len(players) == 1:
+            groups[-1].append(players[0])
+            player = players[0]
+            for existing_player in groups[-1]:
+                players_map[existing_player].append(player)
+                players_map[player].append(existing_player)
+
+        if len(groups) > maxlen:
+            maxlen = len(groups)
+            longest_match = groups
+
+        players = backup_players
+        players_map = backup_players_map
+
+    return longest_match

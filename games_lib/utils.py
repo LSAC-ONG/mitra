@@ -1,3 +1,5 @@
+import discord
+
 async def create_and_move(bot, channels, message):
     rooms = bot["rooms"]
     while len(rooms) < len(channels):
@@ -12,4 +14,7 @@ async def create_and_move(bot, channels, message):
 async def move_back(channel, groups):
     for group in groups:
         for member in group:
-            await member.move_to(channel)
+            try:
+                await member.move_to(channel)
+            except discord.errors.HTTPException:
+                print('Target user is not connected to voice')
