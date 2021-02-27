@@ -22,7 +22,8 @@ bot = {
 commandsFunctions = {
     'init': init_bot.initBot,
     'disconnect': init_bot.disconnect,
-    'game': init_bot.game
+    'game': init_bot.game,
+    'start': init_bot.start
 }
 
 @client.event

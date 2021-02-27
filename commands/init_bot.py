@@ -1,3 +1,10 @@
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '../config.py')
+
+from config import games
+from config import ERR
+
 async def initBot(bot, message):
     voice = message.author.voice
 
@@ -6,7 +13,7 @@ async def initBot(bot, message):
         bot['channel'] = voice_client
         return 'Successfuly connected to channel!'
 
-    return 'Please join a voice channel first!'
+    return ERR["NO_VOICE"]
 
 async def disconnect(bot, message):
     if bot['channel'] != None:
@@ -14,7 +21,25 @@ async def disconnect(bot, message):
         bot['channel'] = None
         return 'Hope you had fun! Mitra going dark...'
 
-    return 'Can\'t disconnect if not already assigned to a voice channel'
+    return ERR["ALREADY_VOICE"]
 
-def game(bot, command):
-    pass
+async def game(bot, message):
+    command = message.content.split(" ")
+    if bot["channel"] != None:
+        if command[2] == "speed_dating":
+            bot["game"] = games["speed_dating"]
+            return bot["game"]["tutorial"]
+        else:
+            return ERR["NO_GAME"]
+    else:
+        return ERR["NO_INIT"]
+
+async def start(bot, message):
+    command = message.content.split(" ")
+    if bot["channel"] != None:
+        if bot["game"] != None:
+            return bot["game"]["start"](bot, message)
+        else:
+            return ERR["NO_GAME_SELECTED"]
+    else:
+        return ERR["NO_INIT"]
