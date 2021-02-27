@@ -16,20 +16,14 @@ intents.presences = True
 client = discord.Client(intents=intents)
 
 bot = {
-    "channel": 'general',
+    "channel": True,
     "game": None,
-}
-
-games = {
-    'speed_dating': {
-        'tutorial':
-        'start': speed_dating.start
-    }
 }
 
 commandsFunctions = {
     'init': init_bot.initBot,
-    'game': init_bot.game
+    'game': init_bot.game,
+    'start': init_bot.start
 }
 
 
