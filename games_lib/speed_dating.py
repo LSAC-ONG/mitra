@@ -5,16 +5,18 @@ sys.path.insert(1, '../config.py')
 
 from config import *
 from .utils import create_and_move
+from .utils import move_back
 
 import time, threading
 import asyncio
 
 players_map = {}
 
-async def roundEndedTask(bot, message):
+async def roundEndedTask(bot, message, groups):
     await asyncio.sleep(10)
     await message.channel.send("Round ended. Hope you made some friends! :) To start a new round, run !mitra start.")
     bot["active_speed_dating_round"] = False
+    await move_back(bot["channel"].channel, groups)
 
 async def start(bot, client, message):
     if bot["active_speed_dating_round"]:
@@ -39,7 +41,7 @@ async def start(bot, client, message):
     if len(groups) > 0:
         await create_and_move(groups, message)
         bot["active_speed_dating_round"] = True
-        client.loop.create_task(roundEndedTask(bot, message))
+        client.loop.create_task(roundEndedTask(bot, message, groups))
 
     pairs = ""
     for group in groups:
