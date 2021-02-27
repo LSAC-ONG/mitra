@@ -47,7 +47,7 @@ async def start(bot, client, message):
     command = message.content.split(" ")
     if bot["channel"] != None:
         if bot["game"] != None:
-            return bot["game"]["start"](bot, client, message)
+            return await bot["game"]["start"](bot, client, message)
         else:
             return ERR["NO_GAME_SELECTED"]
     else:

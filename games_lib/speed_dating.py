@@ -4,6 +4,8 @@ import asyncio
 sys.path.insert(1, '../config.py')
 
 from config import *
+from .utils import create_and_move
+
 import time, threading
 import asyncio
 
@@ -14,7 +16,7 @@ async def roundEndedTask(bot, message):
     await message.channel.send("Round ended. Hope you made some friends! :) To start a new round, run !mitra start.")
     bot["active_speed_dating_round"] = False
 
-def start(bot, client, message):
+async def start(bot, client, message):
     if bot["active_speed_dating_round"]:
         return "Round already in progress. Please wait :)"
 
@@ -35,6 +37,7 @@ def start(bot, client, message):
             players_map[player].append(existing_player)
 
     if len(groups) > 0:
+        await create_and_move(groups, message)
         bot["active_speed_dating_round"] = True
         client.loop.create_task(roundEndedTask(bot, message))
 
@@ -43,7 +46,6 @@ def start(bot, client, message):
         for user in group:
             pairs += user.name + ', '
         pairs += '\n'
-
 
     if len(groups) == 0: 
         pairs = "No more possible allocations. Everyone should know each other now :)"
