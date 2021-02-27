@@ -8,3 +8,8 @@ async def create_and_move(bot, channels, message):
     for i, channel in enumerate(channels):
         for member in channel:
             await member.move_to(bot["rooms"][i])
+
+async def move_back(channel, groups):
+    for group in groups:
+        for member in group:
+            await member.move_to(channel)
