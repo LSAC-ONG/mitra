@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
-DEFAULT_CHANNEL = 'general'
 
 intents = discord.Intents.default()
 intents.members = True
@@ -16,9 +15,23 @@ intents.presences = True
 
 client = discord.Client(intents=intents)
 
+bot = {
+    "channel": 'general',
+    "game": None,
+}
+
+games = {
+    'speed_dating': {
+        'tutorial':
+        'start': speed_dating.start
+    }
+}
+
 commandsFunctions = {
     'init': init_bot.initBot,
+    'game': init_bot.game
 }
+
 
 @client.event
 async def on_message(message):
@@ -29,12 +42,13 @@ async def on_message(message):
         command = message.content.split(' ')
 
         if command[1] in commandsFunctions:
-            response = commandsFunctions[command[1]](message)
+            response = commandsFunctions[command[1]](bot, message)
 
             if response != None:
                 await message.channel.send(response)
         else:
             await message.channel.send(f"!mitra {command[1]} is not a recognized command!")
+
 @client.event
 async def on_ready():
     for guild in client.guilds:
