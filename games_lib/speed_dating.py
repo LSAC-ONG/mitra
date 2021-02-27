@@ -29,7 +29,14 @@ async def start(bot, client, message):
             players_map[player] = []
             #players_map[player].append(player)
     
-    groups = pair_players(players_map, players)
+    groups, players = pair_players(players_map, players)
+
+    if len(players) == 1:
+        groups[-1].append(players[0])
+        player = players[0]
+        for existing_player in groups[-1]:
+            players_map[existing_player].append(player)
+            players_map[player].append(existing_player)
 
     if len(groups) > 0:
         await create_and_move(bot, groups, message)
@@ -81,6 +88,7 @@ def pair_players(player_map, players):
     backup_players = players
     maxlen = 0
     longest_match = [[]]
+    longest_match_players = []
 
     for i in range(20):
         groups = []
@@ -91,18 +99,12 @@ def pair_players(player_map, players):
             if pair != None:
                 groups.append(pair)
 
-        if len(players) == 1:
-            groups[-1].append(players[0])
-            player = players[0]
-            for existing_player in groups[-1]:
-                players_map[existing_player].append(player)
-                players_map[player].append(existing_player)
-
         if len(groups) > maxlen:
             maxlen = len(groups)
             longest_match = groups
+            longest_match_players = players
 
         players = backup_players
         players_map = backup_players_map
 
-    return longest_match
+    return longest_match, longest_match_players
