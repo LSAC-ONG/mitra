@@ -6,12 +6,13 @@ from config import games
 from config import ERR
 
 commands = [
-    "init - ",
-    "status - ",
-    "help - ",
-    "disconnect - ",
-    "game - ",
-    "start - "
+    "init - connects Mitra to the voice channel you are in",
+    "status - displays the status of the bot(selected game and channel connected to)",
+    "help - displays the list of available commands",
+    "list - displays the list of available commands",
+    "disconnect - disconnect Mitra from your voice channel",
+    "game name_of_game - tells Mitra that you are going to play name_of_game",
+    "start -  Mitra will start the selected game for you"
 ]
 
 async def initBot(bot, client, message):
