@@ -5,6 +5,15 @@ sys.path.insert(1, '../config.py')
 from config import games
 from config import ERR
 
+commands = [
+    "init - ",
+    "status - ",
+    "help - ",
+    "disconnect - ",
+    "game - ",
+    "start - "
+]
+
 async def initBot(bot, client, message):
     voice = message.author.voice
 
@@ -43,3 +52,29 @@ async def start(bot, client, message):
             return ERR["NO_GAME_SELECTED"]
     else:
         return ERR["NO_INIT"]
+
+async def status(bot, client, message):
+    if bot["channel"] is None:
+        channel_name = "Not connected"
+    else:
+        channel_name = bot["channel"].channel.name
+
+    if bot["game"] is None:
+        game_selected = "No game selected"
+    else:
+        game_selected = bot["game"]["name"]
+    response = "Status: \n" + "Active on: " + channel_name + "\nGame selected: " + game_selected
+    return response
+
+
+async def list_games(bot, client, message):
+    response = "Available games: "
+    for game in games:
+        response = response + "\n" + str(game)
+    return response
+
+async def help(bot, client, message):
+    response = "Available commands: \n"
+    for command in commands:
+        response = response + command + "\n"
+    return response

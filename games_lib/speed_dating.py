@@ -4,6 +4,8 @@ import asyncio
 sys.path.insert(1, '../config.py')
 
 from config import *
+import time, threading
+import asyncio
 
 players_map = {}
 
@@ -56,6 +58,11 @@ def get_players(bot, client):
         channel.members
     ))
     return online_users
+
+def roundEnded(bot, client, message, time):
+    #collectPlayersBack(get_players(bot, client))
+
+    message.channel.send("Round ended, to start next round use !mitra start")
 
 def pair_players(player_map, players):
     # if len(players_map[players[0]]) == len(players):
