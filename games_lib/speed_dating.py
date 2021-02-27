@@ -3,6 +3,8 @@ import sys
 sys.path.insert(1, '../config.py')
 
 from config import *
+import time, threading
+import asyncio
 
 players_map = {}
 
@@ -23,13 +25,15 @@ def start(bot, client, message):
             players_map[existing_player].append(player)
             players_map[player].append(existing_player)
 
-    strr = ""
+    pairs = ""
     for group in groups:
         for user in group:
-            strr = strr + user.name + " "
-        strr = strr + "\n"
-    return strr
-    return "started game: " + bot["game"]["name"] + "\n" + str(get_players(bot, client))
+            pairs = pairs + user.name + " "
+        pairs = pairs + "\n"
+
+    response = "started game: " + bot["game"]["name"] + "\n" + pairs
+    
+    return response
 
 def get_players(bot, client):
     channel = bot["channel"].channel
@@ -39,6 +43,11 @@ def get_players(bot, client):
         channel.members
     ))
     return online_users
+
+def roundEnded(bot, client, message, time):
+    #collectPlayersBack(get_players(bot, client))
+
+    message.channel.send("Round ended, to start next round use !mitra start")
 
 def pair_players(player_map, players):
     # if len(players_map[players[0]]) == len(players):

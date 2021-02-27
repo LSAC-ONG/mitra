@@ -7,6 +7,20 @@ games = {
         "time": 5,
         "pairs": None,
         "start": speed_dating.start
+    },
+    'pacpac': {
+        'name': "XD",
+        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
+        "time": 5,
+        "pairs": None,
+        "start": None
+    },
+    'xd': {
+        'name': "XD",
+        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
+        "time": 5,
+        "pairs": None,
+        "start": None
     }
 }
 

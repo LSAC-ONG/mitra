@@ -24,7 +24,10 @@ commandsFunctions = {
     'init': init_bot.initBot,
     'disconnect': init_bot.disconnect,
     'game': init_bot.game,
-    'start': init_bot.start
+    'start': init_bot.start,
+    'status': init_bot.status,
+    'list': init_bot.list_games,
+    'help': init_bot.help
 }
 
 @client.event
@@ -41,7 +44,7 @@ async def on_message(message):
             if response != None:
                 await message.channel.send(response)
         else:
-            await message.channel.send(f"!mitra {command[1]} is not a recognized command!")
+            await message.channel.send(f"!mitra {command[1]} is not a recognized command!\n Try !mitra help to see available commands")
 
 @client.event
 async def on_ready():
