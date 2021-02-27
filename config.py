@@ -11,14 +11,14 @@ games = {
     },
     'pacpac': {
         'name': "pacpac",
-        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
+        'tutorial': "Pair with a random person from this channel and talk about anything for 10 minutes",
         "time": 5,
         "pairs": None,
         "start": None
     },
     'skribbl': {
         'name': "Skribbl",
-        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
+        'tutorial': "One of you will draw and the others have to guess. You get points if you're a good artist or a good guesser :) The one with the most score at the end wins.",
         "time": 5,
         "pairs": None,
         "start": skribbl.start
