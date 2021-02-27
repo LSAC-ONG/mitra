@@ -11,6 +11,7 @@ GUILD = os.getenv('DISCORD_GUILD')
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
+intents.voice_states = True
 
 client = discord.Client(intents=intents)
 
@@ -60,5 +61,11 @@ async def on_ready():
 
     members = '\n - '.join([member.name for member in online_users])
     print(f'Guild Members:\n - {members}')
+
+@client.event
+async def on_voice_state_update(member, before, after):
+    if member == client.user and after.channel == None and bot['channel'] != None:
+        await bot['channel'].disconnect()
+        bot['channel'] = None
 
 client.run(TOKEN)
