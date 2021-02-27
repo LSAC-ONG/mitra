@@ -36,7 +36,7 @@ async def on_message(message):
         command = message.content.split(' ')
 
         if command[1] in commandsFunctions:
-            response = await commandsFunctions[command[1]](bot, message)
+            response = await commandsFunctions[command[1]](bot, client, message)
 
             if response != None:
                 await message.channel.send(response)

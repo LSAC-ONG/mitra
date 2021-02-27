@@ -5,7 +5,7 @@ sys.path.insert(1, '../config.py')
 from config import games
 from config import ERR
 
-async def initBot(bot, message):
+async def initBot(bot, client, message):
     voice = message.author.voice
 
     if voice != None and voice.channel != None:
@@ -15,7 +15,7 @@ async def initBot(bot, message):
 
     return ERR["NO_VOICE"]
 
-async def disconnect(bot, message):
+async def disconnect(bot, client, message):
     if bot['channel'] != None:
         await bot['channel'].disconnect()
         bot['channel'] = None
@@ -23,7 +23,7 @@ async def disconnect(bot, message):
 
     return ERR["ALREADY_VOICE"]
 
-async def game(bot, message):
+async def game(bot, client, message):
     command = message.content.split(" ")
     if bot["channel"] != None:
         if command[2] == "speed_dating":
@@ -34,11 +34,11 @@ async def game(bot, message):
     else:
         return ERR["NO_INIT"]
 
-async def start(bot, message):
+async def start(bot, client, message):
     command = message.content.split(" ")
     if bot["channel"] != None:
         if bot["game"] != None:
-            return bot["game"]["start"](bot, message)
+            return bot["game"]["start"](bot, client, message)
         else:
             return ERR["NO_GAME_SELECTED"]
     else:
