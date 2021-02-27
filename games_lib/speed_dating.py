@@ -1,4 +1,5 @@
 import sys
+import asyncio
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, '../config.py')
 
@@ -6,7 +7,15 @@ from config import *
 
 players_map = {}
 
+async def roundEndedTask(bot, message):
+    await asyncio.sleep(10)
+    await message.channel.send("Round ended. Hope you made some friends! :) To start a new round, run !mitra start.")
+    bot["active_speed_dating_round"] = False
+
 def start(bot, client, message):
+    if bot["active_speed_dating_round"]:
+        return "Round already in progress. Please wait :)"
+
     players = get_players(bot, client)
     
     for player in players:
@@ -23,13 +32,21 @@ def start(bot, client, message):
             players_map[existing_player].append(player)
             players_map[player].append(existing_player)
 
-    strr = ""
+    if len(groups) > 0:
+        bot["active_speed_dating_round"] = True
+        client.loop.create_task(roundEndedTask(bot, message))
+
+    pairs = ""
     for group in groups:
         for user in group:
-            strr = strr + user.name + " "
-        strr = strr + "\n"
-    return strr
-    return "started game: " + bot["game"]["name"] + "\n" + str(get_players(bot, client))
+            pairs += user.name + ', '
+        pairs += '\n'
+
+
+    if len(groups) == 0: 
+        pairs = "No more possible allocations. Everyone should know each other now :)"
+    
+    return f"Started game: {bot['game']['name']}\n{pairs}"
 
 def get_players(bot, client):
     channel = bot["channel"].channel

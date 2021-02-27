@@ -16,6 +16,7 @@ intents.voice_states = True
 client = discord.Client(intents=intents)
 
 bot = {
+    "active_speed_dating_round": False,
     "channel": None,
     "game": None,
 }
