@@ -8,7 +8,6 @@ from .utils import create_and_move
 from .utils import move_back
 
 import time, threading
-import asyncio
 
 players_map = {}
 

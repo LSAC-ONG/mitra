@@ -38,6 +38,9 @@ async def game(bot, client, message):
         if command[2] == "speed_dating":
             bot["game"] = games["speed_dating"]
             return bot["game"]["tutorial"]
+        elif command[2] == "skribbl":
+            bot["game"] = games["skribbl"]
+            return bot["game"]["tutorial"]
         else:
             return ERR["NO_GAME"]
     else:

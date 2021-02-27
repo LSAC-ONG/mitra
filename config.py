@@ -1,4 +1,5 @@
 from games_lib import speed_dating
+from games_lib import skribbl
 
 games = {
     'speed_dating': {
@@ -9,18 +10,18 @@ games = {
         "start": speed_dating.start
     },
     'pacpac': {
-        'name': "XD",
+        'name': "pacpac",
         'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
         "time": 5,
         "pairs": None,
         "start": None
     },
-    'xd': {
-        'name': "XD",
+    'skribbl': {
+        'name': "Skribbl",
         'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
         "time": 5,
         "pairs": None,
-        "start": None
+        "start": skribbl.start
     }
 }
 
