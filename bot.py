@@ -4,7 +4,6 @@ import discord
 from commands import init_bot
 from dotenv import load_dotenv
 
-
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
@@ -16,22 +15,15 @@ intents.presences = True
 client = discord.Client(intents=intents)
 
 bot = {
-    "channel": 'general',
+    "channel": None,
     "game": None,
-}
-
-games = {
-    'speed_dating': {
-        'tutorial':
-        'start': speed_dating.start
-    }
 }
 
 commandsFunctions = {
     'init': init_bot.initBot,
+    'disconnect': init_bot.disconnect,
     'game': init_bot.game
 }
-
 
 @client.event
 async def on_message(message):
@@ -42,7 +34,7 @@ async def on_message(message):
         command = message.content.split(' ')
 
         if command[1] in commandsFunctions:
-            response = commandsFunctions[command[1]](bot, message)
+            response = await commandsFunctions[command[1]](bot, message)
 
             if response != None:
                 await message.channel.send(response)
