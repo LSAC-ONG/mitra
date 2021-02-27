@@ -39,7 +39,7 @@ async def start(bot, client, message):
             players_map[player].append(existing_player)
 
     if len(groups) > 0:
-        await create_and_move(groups, message)
+        await create_and_move(bot, groups, message)
         bot["active_speed_dating_round"] = True
         client.loop.create_task(roundEndedTask(bot, message, groups))
 

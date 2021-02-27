@@ -78,3 +78,10 @@ async def help(bot, client, message):
     for command in commands:
         response = response + command + "\n"
     return response
+
+async def reset(bot, client, message):
+    channels = bot["rooms"]
+    while len(channels) > 0:
+        await channels[0].delete()
+        channels.remove(channels[0])
+    return "Everything clear"

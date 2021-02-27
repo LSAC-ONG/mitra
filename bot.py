@@ -19,6 +19,7 @@ bot = {
     "active_speed_dating_round": False,
     "channel": None,
     "game": None,
+    "rooms": []
 }
 
 commandsFunctions = {
@@ -28,7 +29,8 @@ commandsFunctions = {
     'start': init_bot.start,
     'status': init_bot.status,
     'list': init_bot.list_games,
-    'help': init_bot.help
+    'help': init_bot.help,
+    'reset': init_bot.reset
 }
 
 @client.event
