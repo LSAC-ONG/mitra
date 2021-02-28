@@ -1,6 +1,7 @@
 from games_lib import speed_dating
-from games_lib import online_games
-from games_lib import pc_games
+from games_lib import skribbl
+from games_lib import minecraft
+from games_lib import cs_go
 
 games = {
     'speed-dating': {
@@ -15,21 +16,21 @@ games = {
         'tutorial': "Generated rooms for playing Minecraft.",
         "time": 5,
         "pairs": None,
-        "start": pc_games.start
+        "start": minecraft.start
     },
     'cs-go': {
         'name': "Counter-Strike: Global Offensive",
         'tutorial': "Generated rooms for playing Counter-Strike: Global Offensive.",
         "time": 5,
         "pairs": None,
-        "start": pc_games.start
+        "start": cs_go.start
     },
     'skribbl': {
         'name': "Skribbl",
         'tutorial': "Generated rooms for playing Skribbl.\n\nLink: https://skribbl.io/",
         "time": 5,
         "pairs": None,
-        "start": online_games.start
+        "start": skribbl.start
     }
 }
 
