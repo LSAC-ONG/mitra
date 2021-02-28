@@ -1,6 +1,7 @@
 # bot.py
 import os
 import discord
+from random import choice
 from commands import init_bot
 from dotenv import load_dotenv
 
@@ -38,6 +39,11 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    #enable the bot to react at messages
+    emoji = ['\N{THUMBS UP SIGN}','😀','❤️','😎','💪','🤔','👌','🧠','✨','🔥','💣','🏆','🤩']
+    await message.add_reaction(choice(emoji))
+
+    #enable the bot to process the commands
     if message.content.startswith('!mitra '):
         command = message.content.split(' ')
 
