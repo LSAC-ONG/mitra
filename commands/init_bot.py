@@ -13,7 +13,7 @@ commands = [
     "disconnect - disconnect Mitra from the voice channel (!mitra disconnect)",
     "game - game selection (!mitra game GAME_NAME)",
     "start - start selected game (!mitra start)"
-    "joke - make Mitra to write a random joke"
+    "joke - Mitra writes a random joke"
 ]
 
 async def initBot(bot, client, message):
