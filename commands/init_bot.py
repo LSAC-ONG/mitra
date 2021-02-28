@@ -11,7 +11,7 @@ commands = [
     "help - show a help message for commands (!mitra help)",
     "disconnect - disconnect Mitra from the voice channel (!mitra disconnect)",
     "game - game selection (!mitra game GAME_NAME)",
-    "start - start the game (!mitra start)"
+    "start - start selected game (!mitra start)"
 ]
 
 async def initBot(bot, client, message):
