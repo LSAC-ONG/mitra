@@ -94,8 +94,8 @@ async def reset(bot, client, message):
     bot["session"] = False
     channels = bot["rooms"]
     while len(channels) > 0:
-        channels.remove(channels[0])
         await channels[0].delete()
+        channels.remove(channels[0])
     return "Everything clear"
 
 async def joke(bot, client, message):
