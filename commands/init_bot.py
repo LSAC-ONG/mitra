@@ -1,4 +1,5 @@
 import sys
+import pyjokes
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, '../config.py')
 
@@ -12,6 +13,7 @@ commands = [
     "disconnect - disconnect Mitra from the voice channel (!mitra disconnect)",
     "game - game selection (!mitra game GAME_NAME)",
     "start - start selected game (!mitra start)"
+    "joke - make Mitra to write a random joke"
 ]
 
 async def initBot(bot, client, message):
@@ -95,3 +97,6 @@ async def reset(bot, client, message):
         channels.remove(channels[0])
         await channels[0].delete()
     return "Everything clear"
+
+async def joke(bot, client, message):
+    return pyjokes.get_joke()

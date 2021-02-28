@@ -31,7 +31,8 @@ commandsFunctions = {
     'status': init_bot.status,
     'list': init_bot.list_games,
     'help': init_bot.help,
-    'reset': init_bot.reset
+    'reset': init_bot.reset,
+    'joke': init_bot.joke
 }
 
 @client.event

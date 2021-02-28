@@ -1,6 +1,5 @@
 import sys
 import asyncio
-import webbrowser
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, '../config.py')
 
