@@ -46,5 +46,5 @@ Mitra features 3 sets of commands grouped this way:
 ##### !!WARNING!! Mitra will not delete the channels created in previous sessions, so use this command before disconnecting it via GUI admin rights or the disconnect command
 #
 - ##### !mitra disconnect --- disconnect Mitra from your voice channel
-
+#### Special command:
 - ##### !mitra joke --- Mitra writes a random joke
