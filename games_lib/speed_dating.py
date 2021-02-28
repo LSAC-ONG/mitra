@@ -12,13 +12,13 @@ import time, threading
 players_map = {}
 
 async def roundEndedTask(bot, message, groups):
-    await asyncio.sleep(10)
-    await message.channel.send("Round ended. Hope you made some friends! :) To start a new round, run !mitra start.")
-    bot["active_speed_dating_round"] = False
+    await asyncio.sleep(600)
+    await message.channel.send("Round ended! Hope you made some friends! :) To start a new round, run !mitra start.")
+    bot["session"] = False
     await move_back(bot["channel"].channel, groups)
 
 async def start(bot, client, message):
-    if bot["active_speed_dating_round"]:
+    if bot["session"]:
         return "Round already in progress. Please wait :)"
 
     players = get_players(bot, client)
@@ -39,7 +39,7 @@ async def start(bot, client, message):
 
     if len(groups) > 0:
         await create_and_move(bot, groups, message)
-        bot["active_speed_dating_round"] = True
+        bot["session"] = True
         client.loop.create_task(roundEndedTask(bot, message, groups))
 
     pairs = ""

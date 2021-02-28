@@ -1,27 +1,35 @@
 from games_lib import speed_dating
-from games_lib import skribbl
+from games_lib import online_games
+from games_lib import pc_games
 
 games = {
-    'speed_dating': {
+    'speed-dating': {
         'name': "Speed dating",
-        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
+        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes!",
         "time": 5,
         "pairs": None,
         "start": speed_dating.start
     },
-    'pacpac': {
-        'name': "pacpac",
-        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
+    'minecraft': {
+        'name': "Minecraft",
+        'tutorial': "Generated rooms for playing Minecraft.",
         "time": 5,
         "pairs": None,
-        "start": None
+        "start": pc_games.start
+    },
+    'cs-go': {
+        'name': "Counter-Strike: Global Offensive",
+        'tutorial': "Generated rooms for playing Counter-Strike: Global Offensive.",
+        "time": 5,
+        "pairs": None,
+        "start": pc_games.start
     },
     'skribbl': {
         'name': "Skribbl",
-        'tutorial': "Pair with a random person form this channel and talk about anything for 10 minutes",
+        'tutorial': "Generated rooms for playing Skribbl.\n\nLink: https://skribbl.io/",
         "time": 5,
         "pairs": None,
-        "start": skribbl.start
+        "start": online_games.start
     }
 }
 

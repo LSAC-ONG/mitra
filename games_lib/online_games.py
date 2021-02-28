@@ -15,10 +15,10 @@ players_map = {}
 
 async def roundEndedTask(bot, message, groups):
     await message.channel.send("Let's start games! :)")
-    bot["active_speed_dating_round"] = False
+    bot["session"] = False
 
 async def start(bot, client, message):
-    if bot["active_speed_dating_round"]:
+    if bot["session"]:
         return "Round already in progress. Please wait :)"
 
     players = get_players(bot, client)
@@ -49,9 +49,6 @@ def get_players(bot, client):
     return online_users
 
 def pair_players(players):
-    # if len(players_map[players[0]]) == len(players):
-    #     return None
-
     groups = []
 
     while players:
@@ -68,6 +65,10 @@ def pair_players(players):
             user3 = choice(players)
             players.remove(user3)
             pair.append(user3)
+        if players:
+            user4 = choice(players)
+            players.remove(user4)
+            pair.append(user4)
 
         groups.append(pair)
 

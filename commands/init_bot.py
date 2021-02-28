@@ -35,11 +35,17 @@ async def disconnect(bot, client, message):
 async def game(bot, client, message):
     command = message.content.split(" ")
     if bot["channel"] != None:
-        if command[2] == "speed_dating":
-            bot["game"] = games["speed_dating"]
+        if command[2] == "speed-dating":
+            bot["game"] = games["speed-dating"]
             return bot["game"]["tutorial"]
         elif command[2] == "skribbl":
             bot["game"] = games["skribbl"]
+            return bot["game"]["tutorial"]
+        elif command[2] == "cs-go":
+            bot["game"] = games["cs-go"]
+            return bot["game"]["tutorial"]
+        elif command[2] == "minecraft":
+            bot["game"] = games["minecraft"]
             return bot["game"]["tutorial"]
         else:
             return ERR["NO_GAME"]
