@@ -73,12 +73,12 @@ def pair_players(player_map, players):
 
     groups = []
 
-    for i,speaker in enumerate(players):
-        for j,talker in enumerate(players):
-            if talker not in players_map[speaker]:
+    for speaker in players:
+        for talker in players:
+            if talker not in players_map[speaker] and speaker != talker:
+                groups.append([talker, speaker])
                 players_map[speaker].append(talker)
                 players_map[talker].append(speaker)
-                groups.append([talker, speaker])
                 players.remove(talker)
                 players.remove(speaker)
                 break
