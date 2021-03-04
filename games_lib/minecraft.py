@@ -48,9 +48,6 @@ def get_players(bot, client):
     return online_users
 
 def pair_players(players):
-    # if len(players_map[players[0]]) == len(players):
-    #     return None
-
     groups = []
 
     while players:

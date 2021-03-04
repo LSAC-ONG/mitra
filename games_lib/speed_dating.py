@@ -62,14 +62,9 @@ def get_players(bot, client):
     return online_users
 
 def roundEnded(bot, client, message, time):
-    #collectPlayersBack(get_players(bot, client))
-
     message.channel.send("Round ended, to start next round use !mitra start")
 
 def pair_players(player_map, players):
-    # if len(players_map[players[0]]) == len(players):
-    #     return None
-
     groups = []
 
     for speaker in players:
