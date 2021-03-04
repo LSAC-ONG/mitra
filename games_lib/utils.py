@@ -12,3 +12,10 @@ async def move_back(channel, groups):
     for group in groups:
         for member in group:
             await member.move_to(channel)
+
+async def end_session(bot):
+    bot["session"] = False
+    channels = bot["rooms"]
+    while len(channels) > 0:
+        await channels[0].delete()
+        channels.remove(channels[0])

@@ -4,8 +4,7 @@ import asyncio
 sys.path.insert(1, '../config.py')
 
 from config import *
-from .utils import create_and_move
-from .utils import move_back
+from .utils import *
 
 import time, threading
 
@@ -14,8 +13,8 @@ players_map = {}
 async def roundEndedTask(bot, message, groups):
     await asyncio.sleep(600)
     await message.channel.send("Round ended! Hope you made some friends! :) To start a new round, run !mitra start.")
-    bot["session"] = False
     await move_back(bot["channel"].channel, groups)
+    await end_session(bot)
 
 async def start(bot, client, message):
     if bot["session"]:

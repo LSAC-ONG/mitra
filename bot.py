@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+PREFIX = os.getenv('PREFIX')
 
 intents = discord.Intents.default()
 intents.members = True
